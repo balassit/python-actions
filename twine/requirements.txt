@@ -11,7 +11,7 @@ pkginfo==1.4.2
 pycparser==2.19
 readme-renderer==22.0
 requests-toolbelt==0.8.0
-requests==2.19.1
+requests==2.20.0
 six==1.11.0
 tqdm==4.26.0
 twine==1.12.1
