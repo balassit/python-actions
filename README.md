@@ -2,6 +2,10 @@
 
 These Actions support building [Python](https://www.python.org/) packages with setup.py and uploading them to [PyPi](https://pypi.python.org) or alternate repositories using the [twine](https://pypi.org/project/twine/) utility.
 
+## pytest
+
+See [pytest README](pytest/README.md) for usage details.
+
 ## setup.py (check & build)
 
 See [setup-py README](setup-py/README.md) for usage details.
@@ -37,11 +41,17 @@ action "sdist" {
   needs = "check"
 }
 
+action "unit-test" {
+  uses = "ross/python-actions/setup-py/<python-version>@<commit-ish>"
+  args = "pytest"
+  needs = "sdist"
+}
+
 action "upload" {
   uses = "ross/python-actions/twine@<commit-ish>"
   args = "upload ./dist/<your-module-name>-*.tar.gz"
   secrets = ["TWINE_PASSWORD", "TWINE_USERNAME"]
-  needs = "sdist"
+  needs = "unit-test"
 }
 ```
 
